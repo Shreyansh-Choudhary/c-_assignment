@@ -1,0 +1,29 @@
+51. Declaring and Implementing a Virtual Base Class
+Use the virtual keyword during inheritance.
+
+Syntax:
+cpp
+class Base { ... };
+class Derived1 : virtual public Base { ... };  // Virtual inheritance
+class Derived2 : virtual public Base { ... };
+class Final : public Derived1, public Derived2 { ... };  // Only one 'Base'
+Example:
+cpp
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    void eat() { cout << "Eating..." << endl; }
+};
+
+class Mammal : virtual public Animal {};  // Virtual inheritance
+class WingedAnimal : virtual public Animal {};  // Virtual inheritance
+
+class Bat : public Mammal, public WingedAnimal {};  // Only one 'Animal'
+
+int main() {
+    Bat b;
+    b.eat();  // ✅ No ambiguity (only one Animal)
+    return 0;
+}
